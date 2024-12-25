@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Items Chart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chartWrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+                
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        canvas {
+            margin-top: 20px;
+            display: block;
+        }
+
+        .chartContainer {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            
+        }
+
+        #recite {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        input[type="date"] {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reusable Items Chart</h1>
+
+    <table id="itemsTable">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Type (Reusable/Non-Reusable)</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button id="addRowButton">Add Row</button>
+    <button id="generateChartButton">Generate Charts</button>
+<div class="chartWrapper">
+    <div class="chartContainer">
+        <canvas id="chartCanvas" width="600" height="600"></canvas>
+        <div id="recite"></div>
+    </div>
+
+    <div class="chartContainer">
+        <canvas id="reusableChartCanvas" width="600" height="600"></canvas>
+    </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const tableBody = document.querySelector("#itemsTable tbody");
+        const addRowButton = document.getElementById("addRowButton");
+        const generateChartButton = document.getElementById("generateChartButton");
+        const chartCanvas = document.getElementById("chartCanvas");
+        const reusableChartCanvas = document.getElementById("reusableChartCanvas");
+        const reciteDiv = document.getElementById("recite");
+
+        function addRow() {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><input type="text" placeholder="Item"></td>
+                <td><input type="number" value="0" min="0"></td>
+                <td>
+                    <select>
+                        <option value="Reusable">Reusable</option>
+                        <option value="Non-Reusable">Non-Reusable</option>
+                    </select>
+                </td>
+                <td><input type="date"></td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        // Add 4 rows automatically
+        for (let i = 0; i < 4; i++) {
+            addRow();
+        }
+
+        addRowButton.addEventListener("click", addRow);
+
+        function generateRandomColor() {
+            return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        }
+
+        generateChartButton.addEventListener("click", () => {
+            const rows = tableBody.querySelectorAll("tr");
+            const labels = [];
+            const data = [];
+            const backgroundColors = [];
+            let reusableCount = 0;
+            let nonReusableCount = 0;
+
+            rows.forEach(row => {
+                const item = row.children[0].querySelector("input").value;
+                const quantity = parseInt(row.children[1].querySelector("input").value, 10);
+                const type = row.children[2].querySelector("select").value;
+                const date = row.children[3].querySelector("input").value;
+
+                if (!date) {
+                    alert("Please select a date for all items.");
+                    return;
+                }
+
+                if (item && quantity > 0) {
+                    labels.push(item);
+                    data.push(quantity);
+                    backgroundColors.push(generateRandomColor());
+                    if (type === "Reusable") {
+                        reusableCount += quantity;
+                    } else if (type === "Non-Reusable") {
+                        nonReusableCount += quantity;
+                    }
+                }
+            });
+
+            if (data.length === 0) {
+                alert("No data to display.");
+                return;
+            }
+
+            // First chart
+            const ctx = chartCanvas.getContext("2d");
+            new Chart(ctx, {
+                type: "pie",
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: backgroundColors,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top",
+                        },
+                    },
+                }
+            });
+
+            // Second chart for reusable vs non-reusable
+            const reusableCtx = reusableChartCanvas.getContext("2d");
+            new Chart(reusableCtx, {
+                type: "pie",
+                data: {
+                    labels: ["Reusable", "Non-Reusable"],
+                    datasets: [{
+                        data: [reusableCount, nonReusableCount],
+                        backgroundColor: [generateRandomColor(), generateRandomColor()],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: "top",
+                        },
+                    },
+                }
+            });
+
+            // Update recite with the details
+            const total = data.reduce((sum, value) => sum + value, 0);
+            const details = labels.map((label, index) => {
+                const percentage = ((data[index] / total) * 100).toFixed(2);
+                return `${label}: ${data[index]} (${percentage}%)`;
+            }).join("<br>");
+
+            reciteDiv.innerHTML = details;
+        });
+    </script>
+</body>
+</html>
