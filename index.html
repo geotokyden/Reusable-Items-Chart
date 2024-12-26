@@ -19,7 +19,6 @@
             justify-content: center;
             gap: 20px;
         }
-                
 
         table {
             width: 80%;
@@ -59,7 +58,6 @@
             position: relative;
             width: 600px;
             height: 600px;
-            
         }
 
         #recite {
@@ -91,16 +89,16 @@
 
     <button id="addRowButton">Add Row</button>
     <button id="generateChartButton">Generate Charts</button>
-<div class="chartWrapper">
-    <div class="chartContainer">
-        <canvas id="chartCanvas" width="600" height="600"></canvas>
-        <div id="recite"></div>
-    </div>
+    <div class="chartWrapper">
+        <div class="chartContainer">
+            <canvas id="chartCanvas" width="600" height="600"></canvas>
+        </div>
 
-    <div class="chartContainer">
-        <canvas id="reusableChartCanvas" width="600" height="600"></canvas>
+        <div class="chartContainer">
+            <canvas id="reusableChartCanvas" width="600" height="600"></canvas>
+        </div>
     </div>
-</div>
+    <div id="recite"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const tableBody = document.querySelector("#itemsTable tbody");
@@ -216,12 +214,14 @@
             });
 
             // Update recite with the details
-            const total = data.reduce((sum, value) => sum + value, 0);
-            const details = labels.map((label, index) => {
-                const percentage = ((data[index] / total) * 100).toFixed(2);
-                return `${label}: ${data[index]} (${percentage}%)`;
-            }).join("<br>");
-
+            const total = reusableCount + nonReusableCount;
+            const details = `
+                <strong>Overall Details:</strong><br>
+                Total Reusable Items: ${reusableCount} (${((reusableCount / total) * 100).toFixed(2)}%)<br>
+                Total Non-Reusable Items: ${nonReusableCount} (${((nonReusableCount / total) * 100).toFixed(2)}%)<br>
+                <strong>Item Breakdown:</strong><br>
+                ${labels.map((label, index) => `${label}: ${data[index]} (${((data[index] / total) * 100).toFixed(2)}%)`).join("<br>")}
+            `;
             reciteDiv.innerHTML = details;
         });
     </script>
