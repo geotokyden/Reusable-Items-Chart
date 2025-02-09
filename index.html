@@ -3,207 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reusable Items Chart</title>
+    <title>Home Page</title>
     <style>
         body {
-            background-color: #F5F7FA;
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #333;
+            background-color: #F2AE66;
         }
-
-        /* Navigation Bar */
-        nav {
-            width: 100%;
+        
+        header {
             background-color: #4CAF50;
+            color: white;
             padding: 15px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            text-align: center;
+        }
+
+        nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            justify-content: center;
+            background-color: #333;
         }
 
-        nav .logo {
+        nav a {
             color: white;
-            font-size: 22px;
-            font-weight: bold;
+            padding: 14px 20px;
             text-decoration: none;
+            text-align: center;
         }
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
         }
 
-        nav ul li {
-            padding: 0 15px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-        }
-
-        /* Page Layout */
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin-top: 20px;
-            background: white;
+        main {
             padding: 20px;
+            text-align: center;
+        }
+
+        #button{
+            align-items: center;
+            background-color: #fff;
             border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #4CAF50;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: orange;
-            color: white;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background-color: orange;
-            color: white;
-            border: none;
-            border-radius: 6px;
+            box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+            box-sizing: border-box;
+            color: #121212;
             cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
+            display: inline-flex;
+            flex: 1 1 auto;
+            font-family: Inter,sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            justify-content: center;
+            line-height: 1;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.2rem;
+            text-align: right;
+            text-decoration: none;
+            transition: .2s,-webkit-box-shadow .2s;
+            white-space: nowrap;
+            border: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            
+            position: relative;
+            }
 
-        button:hover {
-            background-color: #1565C0;
-        }
-
-        .chartContainer {
-            margin-top: 20px;
-        }
-
-        #recite {
-            margin-top: 15px;
-            font-size: 16px;
+            #button:hover {
+            box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+        
+            }
+        
+        footer {
+            background-color: #333;
+            color: white;
             text-align: center;
-            color: #555;
+            padding: 10px 20px;
+            position: relative; 
+            bottom: 0; 
+            width: 100%;
+            font-size: x-large;
+        }
+
+        /* Additional styles for the login form */
+        .login-form {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .login-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Error message styling */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <header>
+        <h1>Welcome to Our Reusable Items Chart</h1>
+    </header>
+
     <nav>
-        <a href="index.html" class="logo">Website</a>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="service.html">Contact</a></li>
-        </ul>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="service.html">Services</a>
+        <a href="#contact">Contact</a>
     </nav>
 
-    <div class="container">
-        <h1>Reusable Items Chart</h1>
-        <table id="itemsTable">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Quantity</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-        <button id="addRowButton">Add Row</button>
-        <button id="generateChartButton">Generate Charts</button>
-        <div class="chartContainer">
-            <canvas id="chartCanvas"></canvas>
-        </div>
-        <div class="chartContainer">
-            <canvas id="reusableChartCanvas"></canvas>
-        </div>
-        <div id="recite"></div>
-    </div>
+    <main>
+        <h2>Home Page Content</h2>
+        <p>This is a simple home page layout that you can customize as needed.</p>
+       
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Login Form -->
+        <div class="login-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required aria-required="true">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required aria-required="true">
+
+                <input type="submit" value="Login">
+                <div id="errorMessage" class="error-message" role="alert" aria-live="assertive"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+    </footer>
+
     <script>
-        const tableBody = document.querySelector("#itemsTable tbody");
-        const addRowButton = document.getElementById("addRowButton");
-        const generateChartButton = document.getElementById("generateChartButton");
-        const chartCanvas = document.getElementById("chartCanvas").getContext("2d");
-        const reusableChartCanvas = document.getElementById("reusableChartCanvas").getContext("2d");
+        // JavaScript to handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
-        function addRow() {
-            const row = document.createElement("tr");
-            row.innerHTML = `  
-                <td><input type="text" placeholder="Item"></td>
-                <td><input type="number" value="0" min="0"></td>
-                <td>
-                    <select>
-                        <option value="Reusable">Reusable</option>
-                        <option value="Non-Reusable">Non-Reusable</option>
-                    </select>
-                </td>
-                <td><input type="date"></td>
-            `;
-            tableBody.appendChild(row);
-        }
+            // Get input values
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
 
-        for (let i = 0; i < 4; i++) {
-            addRow();
-        }
+            // Clear previous error messages
+            errorMessage.textContent = '';
 
-        addRowButton.addEventListener("click", addRow);
-
-        generateChartButton.addEventListener("click", () => {
-            new Chart(chartCanvas, {
-                type: "bar",
-                data: {
-                    labels: ["Item A", "Item B", "Item C"],
-                    datasets: [{
-                        label: "Quantity",
-                        data: [Math.random() * 10, Math.random() * 10, Math.random() * 10],
-                        backgroundColor: "#1E88E5"
-                    }]
-                }
-            });
-
-            new Chart(reusableChartCanvas, {
-                type: "doughnut",
-                data: {
-                    labels: ["Reusable", "Non-Reusable"],
-                    datasets: [{
-                        data: [Math.random() * 10, Math.random() * 10],
-                        backgroundColor: ["#43A047", "#E53935"]
-                    }]
-                }
-            });
+            // Validate email and password
+            if (email === 'admin1' && password === 'admin1') {
+                // Redirect to index.html on successful login
+                window.location.href = 'home.html';
+            } else {
+                // Display error message for invalid credentials
+                errorMessage.textContent = 'Invalid email or password. Please try again.';
+            }
         });
     </script>
 </body>
