@@ -3,113 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Reusable Items Chart</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #F5F7FA;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #F2AE66;
-        }
-        
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-
-        nav {
             display: flex;
-            justify-content: center;
-            background-color: #333;
-        }
-
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-
-        #button{
+            flex-direction: column;
             align-items: center;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
-            box-sizing: border-box;
-            color: #121212;
-            cursor: pointer;
-            display: inline-flex;
-            flex: 1 1 auto;
-            font-family: Inter,sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            justify-content: center;
-            line-height: 1;
-            margin: 0;
-            outline: none;
-            padding: 1rem 1.2rem;
-            text-align: right;
-            text-decoration: none;
-            transition: .2s,-webkit-box-shadow .2s;
-            white-space: nowrap;
-            border: 0;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            
-            position: relative;
-            }
+            color: #333;
+        }
 
-            #button:hover {
-            box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
-        
-            }
-        
-        
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: relative; 
-            bottom: 0; 
+        /* Navigation Bar */
+        nav {
             width: 100%;
+            background-color: #4CAF50;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .logo {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            padding: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        /* Page Layout */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: orange;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1565C0;
+        }
+
+        .chartContainer {
+            margin-top: 20px;
+        }
+
+        #recite {
+            margin-top: 15px;
+            font-size: 16px;
+            text-align: center;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Our Reusable Items Chart</h1>
-    </header>
-
+    <!-- Navigation Bar -->
     <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="service.html">Services</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html" class="logo">Website</a>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="service.html">Contact</a></li>
+        </ul>
     </nav>
 
-    <main>
-        <br><h2>Home Page Content</h2></br>
-        <p>This is a simple home page layout that you can customize as needed.</p>
-        <a id="button" href="home.html">Lets Start</a>
-    </main>
+    <div class="container">
+        <h1>Reusable Items Chart</h1>
+        <table id="itemsTable">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button id="addRowButton">Add Row</button>
+        <button id="generateChartButton">Generate Charts</button>
+        <div class="chartContainer">
+            <canvas id="chartCanvas"></canvas>
+        </div>
+        <div class="chartContainer">
+            <canvas id="reusableChartCanvas"></canvas>
+        </div>
+        <div id="recite"></div>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 Your Company Name. All rights reserved.</p>
-    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const tableBody = document.querySelector("#itemsTable tbody");
+        const addRowButton = document.getElementById("addRowButton");
+        const generateChartButton = document.getElementById("generateChartButton");
+        const chartCanvas = document.getElementById("chartCanvas").getContext("2d");
+        const reusableChartCanvas = document.getElementById("reusableChartCanvas").getContext("2d");
+
+        function addRow() {
+            const row = document.createElement("tr");
+            row.innerHTML = `  
+                <td><input type="text" placeholder="Item"></td>
+                <td><input type="number" value="0" min="0"></td>
+                <td>
+                    <select>
+                        <option value="Reusable">Reusable</option>
+                        <option value="Non-Reusable">Non-Reusable</option>
+                    </select>
+                </td>
+                <td><input type="date"></td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        for (let i = 0; i < 4; i++) {
+            addRow();
+        }
+
+        addRowButton.addEventListener("click", addRow);
+
+        generateChartButton.addEventListener("click", () => {
+            new Chart(chartCanvas, {
+                type: "bar",
+                data: {
+                    labels: ["Item A", "Item B", "Item C"],
+                    datasets: [{
+                        label: "Quantity",
+                        data: [Math.random() * 10, Math.random() * 10, Math.random() * 10],
+                        backgroundColor: "#1E88E5"
+                    }]
+                }
+            });
+
+            new Chart(reusableChartCanvas, {
+                type: "doughnut",
+                data: {
+                    labels: ["Reusable", "Non-Reusable"],
+                    datasets: [{
+                        data: [Math.random() * 10, Math.random() * 10],
+                        backgroundColor: ["#43A047", "#E53935"]
+                    }]
+                }
+            });
+        });
+    </script>
 </body>
 </html>
